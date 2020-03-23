@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dockerone-deployment
+  labels:
+    app: dockerone
+    tier: frontend
+    env: production
+    component: aspnet
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dockerone
+  template:
+    metadata:
+      labels:
+        app: dockerone
+    spec:
+      containers:
+      - name: dockerone
+        image: vijayshinva/dockerone
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: 32Mi
+            cpu: 250m
+          limits: # Equal Request
+            memory: 32Mi
+            cpu: 250m
+        livenessProbe:
+          httpGet:
+              path: /liveness/probe
+              port: 80
+          initialDelaySeconds: 15
+          timeoutSeconds: 2
+          periodSeconds: 5
+          failureThreshold: 1
+      nodeSelector:
+        kubernetes.io/role: agent
+        beta.kubernetes.io/os: linux
+        type: virtual-kubelet
+      tolerations:
+      - key: virtual-kubelet.io/provider
+        operator: Exists

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dockerone-settings
+  namespace: default
+  labels:
+    app: dockerone-settings
+data:
+  log_level: verbose
+  setting.1: setting.1.value
+  setting.2: "setting.2.value"

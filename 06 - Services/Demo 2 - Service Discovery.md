@@ -1,0 +1,1 @@
+kubectl exec -it dockerone-deployment-7d6b8d8b7f-bpfhk curl dockerone-service-lb

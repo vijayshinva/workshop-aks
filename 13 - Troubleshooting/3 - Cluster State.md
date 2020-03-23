@@ -1,0 +1,1 @@
+kubectl diff -f ./my-manifest.yaml

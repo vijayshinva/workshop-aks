@@ -1,0 +1,1 @@
+kubectl apply -f dockerone-resource-quota.yaml --namespace=quota-example

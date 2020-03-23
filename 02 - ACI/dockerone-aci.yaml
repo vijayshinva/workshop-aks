@@ -1,0 +1,27 @@
+apiVersion: 2018-10-01
+location: eastus
+name: acidemo
+properties:
+  containers:
+  - name: acidemo
+    properties:
+      image: vijayshinva/dockerone
+      ports: 
+        - port: 80
+      resources:
+        requests:
+          cpu: 1.0
+          memoryInGB: 1.5
+      livenessProbe:
+        httpGet:
+            path: /liveness/probe
+            port: 80
+  ipAddress:
+    type: Public
+    ports:
+      - port: 80
+    dnsNameLabel: vi-aci-demo
+  osType: Linux
+  restartPolicy: Always
+tags: null
+type: Microsoft.ContainerInstance/containerGroups
